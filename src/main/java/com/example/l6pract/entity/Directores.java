@@ -1,26 +1,30 @@
 package com.example.l6pract.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "artistas")
-public class Artista {
+@Table(name = "directores")
+public class Directores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "artistaId", nullable = false)
+    @Column(name = "directorId", nullable = false)
     private Integer id;
 
+    @Size(max = 100)
     @Column(name = "nombre", length = 100)
     private String nombre;
 
-    @Column(name = "genero", length = 50)
-    private String genero;
-
+    @Size(max = 9)
     @Column(name = "telefono", length = 9)
     private String telefono;
+
+    @Size(max = 50)
+    @Column(name = "nacionalidad", length = 50)
+    private String nacionalidad;
 
 }
