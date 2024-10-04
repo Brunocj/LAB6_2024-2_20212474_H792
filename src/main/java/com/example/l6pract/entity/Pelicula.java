@@ -1,6 +1,7 @@
 package com.example.l6pract.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +18,11 @@ public class Pelicula {
     @Column(name = "peliculaId", nullable = false)
     private Integer id;
 
-    @Size(max = 100)
+    @Size(min = 3,max = 100)
+    @NotBlank
     @Column(name = "titulo", length = 100)
     private String titulo;
+
 
     @Column(name = "fechaEstreno")
     private LocalDate fechaEstreno;
