@@ -135,6 +135,14 @@ public class lab6Controller {
         Optional<Director> optionalDirector = directorRepository.findById(id);
         optionalDirector.ifPresent(value -> model.addAttribute("director", value));
         Boolean flag = true;
+
+        ArrayList<String> listaNacionalidades = new ArrayList<>();
+        listaNacionalidades.add("Peruano");
+        listaNacionalidades.add("Argentino");
+        listaNacionalidades.add("Boliviano");
+        listaNacionalidades.add("Paraguayo");
+        listaNacionalidades.add("Brasileño");
+        model.addAttribute("nacionalidades", listaNacionalidades);
         model.addAttribute("editar", flag);
         return "directorForm";
 
