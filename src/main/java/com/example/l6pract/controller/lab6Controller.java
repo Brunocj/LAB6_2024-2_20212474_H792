@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -69,7 +70,15 @@ public class lab6Controller {
     public String peliculasModSave(@ModelAttribute("pelicula") @Valid Pelicula pelicula, BindingResult bindingResult,
                                    RedirectAttributes attr){
 
-        peliculaRepository.save(pelicula);
+        if (!bindingResult.hasErrors()) { //si no hay errores, se realiza el flujo normal
+
+            peliculaRepository.save(pelicula);
+
+
+        } else { //hay al menos 1 error
+
+            return "peliculaForm";
+        }
         return "redirect:/peliculas";
 
     }
@@ -87,8 +96,14 @@ public class lab6Controller {
     @GetMapping("/director/crear")
     public String directoresCrear(@ModelAttribute("director") Director director,
                                 Model model){
-
+        ArrayList<String> listaNacionalidades = new ArrayList<>();
+        listaNacionalidades.add("Peruano");
+        listaNacionalidades.add("Argentino");
+        listaNacionalidades.add("Boliviano");
+        listaNacionalidades.add("Paraguayo");
+        listaNacionalidades.add("Brasileño");
         model.addAttribute("director", director);
+        model.addAttribute("nacionalidades", listaNacionalidades);
         return "directorForm";
 
     }
@@ -97,8 +112,31 @@ public class lab6Controller {
     public String directorSave(@ModelAttribute("director") @Valid Director director, BindingResult bindingResult,
                                RedirectAttributes attr){
 
-        directorRepository.save(director);
+        if (!bindingResult.hasErrors()) { //si no hay errores, se realiza el flujo normal
+
+            directorRepository.save(director);
+
+
+        } else { //hay al menos 1 error
+
+            return "directorForm";
+        }
+
+
+
         return "redirect:/director";
+
+    }
+    @GetMapping("/director/modificar")
+    public String peliculasMod(@ModelAttribute("director") Director director,
+                               Model model,
+                               @RequestParam("id") int id){
+
+        Optional<Director> optionalDirector = directorRepository.findById(id);
+        optionalDirector.ifPresent(value -> model.addAttribute("director", value));
+        Boolean flag = true;
+        model.addAttribute("editar", flag);
+        return "directorForm";
 
     }
 }

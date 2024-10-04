@@ -26,7 +26,7 @@
     <td th:text="${director.nombre}"></td>
     <td th:text="${director.telefono}"></td>
     <td th:text="${director.nacionalidad}"></td>
-    <td><a th:href="@{'/peliculas/modificar' + '?id=' + ${director.id}}" class="btn btn-primary">Editar</a></td>
+    <td><a th:href="@{'/director/modificar' + '?id=' + ${director.id}}" class="btn btn-primary">Editar</a></td>
     </tbody>
 
 </table>

@@ -13,7 +13,32 @@
 <div th:insert="~{menu.html :: navbar}"></div>
 <div th:if="${editar != null}">
     <h1>Editar director</h1>
+    <form method="post" th:action="@{/director/save}" th:object="${director}">
+        <div class="mb-3">
+            <label  class="form-label">Nombre del director:</label>
+            <input  type="text" class="form-control"  th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Teléfono celular:</label>
+            <input  type="text" class="form-control"  th:field="*{telefono}"  th:classappend="${#fields.hasErrors('telefono')?'is-invalid':''}" >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 
+        </div>
+        <div class="mb-3">
+            <label  class="form-label">Nacionalidad:</label>
+            <input  type="text" class="form-control"  th:field="*{nacionalidad}" th:classappend="${#fields.hasErrors('nacionalidad')?'is-invalid':''}" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('nacionalidad')}" th:errors="*{nacionalidad}"></div>
+            <select class="form-select" name="nacionalidad" th:field="*{nacionalidad}">
+                <option th:value="null">--------------------</option>
+                <option th:each="n : ${nacionalidades}" th:value="${n}"
+                        th:text="${n}"></option>
+            </select>
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-success mb-2">Guardar</button>
+        </div>
+    </form>
 
 </div>
 
@@ -36,7 +61,11 @@
             <label  class="form-label">Nacionalidad:</label>
             <input  type="text" class="form-control"  th:field="*{nacionalidad}" th:classappend="${#fields.hasErrors('nacionalidad')?'is-invalid':''}" required>
             <div class="invalid-feedback" th:if="${#fields.hasErrors('nacionalidad')}" th:errors="*{nacionalidad}"></div>
-
+            <select class="form-select" name="nacionalidad" th:field="*{nacionalidad}">
+                <option th:value="null">--------------------</option>
+                <option th:each="n : ${nacionalidades}" th:value="${n}"
+                        th:text="${n}"></option>
+            </select>
         </div>
         <div class="col-12 mt-3">
             <button type="submit" class="btn btn-success mb-2">Guardar</button>
