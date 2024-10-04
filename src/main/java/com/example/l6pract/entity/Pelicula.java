@@ -1,10 +1,12 @@
 package com.example.l6pract.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 
@@ -27,6 +29,7 @@ public class Pelicula {
     @Column(name = "fechaEstreno")
     private LocalDate fechaEstreno;
 
+    @Range(min = 0)
     @Column(name = "duracionMinutos")
     private Integer duracionMinutos;
 
